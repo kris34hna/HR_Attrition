@@ -1,13 +1,13 @@
 #  HR Employee Attrition Analysis — Power BI Dashboard
 
-> Analyzing IBM HR employee data to uncover why employees are leaving — examining attrition patterns across departments, job roles, salary bands, age groups, marital status, business travel, overtime, and education fields to help HR teams reduce turnover and retain top talent.
+> Analyzing IBM HR employee data to uncover why employees are leaving — examining attrition patterns across departments, job roles, salary bands, age groups, marital status, business travel, and overtime to help HR teams reduce turnover and retain top talent.
 
 ---
 
 Brief Summary
 =============
 
-An end-to-end HR analytics project on 1,470 IBM employees (35 features) — involving data modeling in Microsoft Fabric, DAX measure creation, and a 3-page interactive Power BI dashboard — to answer: **"Why are employees leaving and which groups are most at risk of attrition?"**
+An end-to-end HR analytics project on 1,470 IBM employees (35 features) — involving data modeling in Microsoft Fabric, DAX measure creation, and a 3-page interactive Power BI dashboard — to answer: **"What is the overall attrition rate, which departments are losing the most people, and is there a relationship between pay, age, and the decision to leave?"**
 
 ---
 
@@ -21,21 +21,18 @@ This project analyses IBM's HR employee dataset to surface actionable insights a
 Problem Statement
 =================
 
-Employee attrition is a costly challenge for organizations — replacing an employee can cost 50–200% of their annual salary. Understanding **who is leaving, why, and from which segments** is the first step toward building an effective retention strategy.
+Employee attrition is a costly challenge for organizations — replacing an employee can cost 50–200% of their annual salary. IBM's HR team needs a clear, data-driven understanding of who is leaving and why.
+
+**Questions To Be Answered:**
+
+| # | Business Question |
+|---|------------------|
+| 1 | What is the overall attrition rate? |
+| 2 | Which departments are losing the most people? |
+| 3 | Is there a relationship between pay, age, and the decision to leave? |
 
 **Core Business Question:**
-> *"Why are employees leaving — and which departments, roles, salary bands, and demographics are at highest attrition risk?"*
-
-**Key Business Questions:**
-
-| # | Question |
-|---|----------|
-| 1 | Which departments have the highest attrition rate? |
-| 2 | Which job roles are most at risk of leaving? |
-| 3 | Does salary band significantly impact attrition? |
-| 4 | Which age groups are most likely to leave? |
-| 5 | Does overtime, marital status, or business travel affect attrition? |
-| 6 | Which education fields show the highest attrition rates? |
+> *"Why are employees leaving — and which departments, roles, salary bands, and demographics are at the highest attrition risk?"*
 
 ---
 
@@ -115,9 +112,9 @@ Methods
 | **2. Semantic Model** | Built `HR_semantic_model` with proper data types, relationships, and column formatting |
 | **3. Feature Engineering** | Created `Age_Group` (4 buckets) and `Salary_band` (4 buckets) in Power Query for segment analysis |
 | **4. DAX Measures** | Built core KPI measures — `Attrition Rate %`, `Employees Left`, `Total Headcount`, `Average Income`, `Avg Tenure of Leavers` |
-| **5. Dashboard — Overview** | KPI cards + Attrition by Department (bar chart) + Attrition Decomposition Tree (Department → Job Role → Salary Band) |
-| **6. Dashboard — Deep Dive 1** | Attrition by Job Role table (with color-coded attrition rate) + Attrition by Salary Band table (with conditional formatting) |
-| **7. Dashboard — Deep Dive 2** | Attrition by Age Group table + Marital Status donut + Business Travel donut + Overtime bar + Education Field table |
+| **5. Dashboard — Overview** | KPI cards + Attrition by Department bar chart + Attrition Decomposition Tree (Department → Job Role → Salary Band) |
+| **6. Dashboard — Deep Dive 1** | Attrition by Job Role table (color-coded) + Attrition by Salary Band table (conditional formatting) |
+| **7. Dashboard — Deep Dive 2** | Attrition by Age Group + Marital Status + Business Travel + Overtime + Education Field |
 | **8. Slicers** | Age, Department, Salary Band filters applied across all 3 pages |
 
 ---
@@ -135,52 +132,37 @@ Key Insights
 | Average Income | $6,503 |
 | Avg Tenure of Leavers | 5.1 years |
 
-**By Department:**
+**Q1 — What is the overall attrition rate?**
 
 | # | Insight |
 |---|---------|
-| 1 | **Sales has the highest attrition (20.63%)** — 1 in 5 Sales employees left |
-| 2 | **Human Resources** follows at 19.05% — a concerning rate for the people function itself |
-| 3 | **R&D has the lowest attrition (13.84%)** despite being the largest department (133 leavers) |
+| 1 | Overall attrition rate is **16.12%** — meaning 1 in 6 employees left the organization |
+| 2 | **237 employees left** out of a total headcount of 1,470 — with an average tenure of only **5.1 years** |
 
-**By Job Role:**
-
-| # | Insight |
-|---|---------|
-| 4 | **Sales Representatives have the highest attrition rate (39.76%)** — nearly 2 in 5 left (33 out of 83) |
-| 5 | **Laboratory Technicians (23.94%)** and **Human Resources (23.08%)** are next highest risk roles |
-| 6 | **Research Directors (2.50%)** and **Managers (4.90%)** are the most stable roles |
-
-**By Salary Band:**
+**Q2 — Which departments are losing the most people?**
 
 | # | Insight |
 |---|---------|
-| 7 | **Under 3K has the highest attrition (28.61%)** — lowest earners are most likely to leave |
-| 8 | **Attrition drops as salary increases** — Above 10K band has only 8.90% attrition, confirming pay is a key retention lever |
+| 3 | **Sales has the highest attrition (20.63%)** — 1 in 5 Sales employees left |
+| 4 | **Human Resources** follows at 19.05% — a concerning rate for the people function itself |
+| 5 | **R&D has the lowest attrition (13.84%)** despite being the largest department with 133 leavers |
+| 6 | **Sales Representatives have the highest role-level attrition (39.76%)** — nearly 2 in 5 left (33 out of 83) |
+| 7 | **Laboratory Technicians (23.94%)** and **Human Resources role (23.08%)** are next highest risk |
+| 8 | **Research Directors (2.50%)** and **Managers (4.90%)** are the most stable roles |
 
-**By Age Group:**
-
-| # | Insight |
-|---|---------|
-| 9 | **18–25 age group has the highest attrition (35.77%)** — young employees are the most at-risk segment |
-| 10 | **26–35 group contributes the most leavers (116)** despite lower individual rate (19.14%) due to large headcount |
-| 11 | **36–45 age group is the most stable (9.19% attrition)** — mid-career employees are most settled |
-
-**By Demographics & Work Style:**
+**Q3 — Is there a relationship between pay, age, and the decision to leave?**
 
 | # | Insight |
 |---|---------|
-| 12 | **Single employees have the highest attrition (25.53%)** vs Married (12.48%) and Divorced (10.09%) |
-| 13 | **Frequent travelers have the highest attrition (24.91%)** — business travel fatigue is a clear retention risk |
+| 9 | **YES — pay and attrition are strongly linked.** Under 3K salary band has 28.61% attrition vs only 8.90% for Above 10K |
+| 10 | **Attrition drops consistently as salary increases** — pay is the single most controllable retention lever |
+| 11 | **YES — age and attrition are strongly linked.** The 18–25 group has the highest attrition (35.77%) |
+| 12 | **26–35 group contributes the most leavers (116)** due to large headcount despite lower individual rate (19.14%) |
+| 13 | **36–45 age group is the most stable (9.19%)** — mid-career employees are least likely to leave |
 | 14 | **Overtime workers are 3x more likely to leave (30.53%)** vs non-overtime employees (10.44%) |
-
-**By Education Field:**
-
-| # | Insight |
-|---|---------|
-| 15 | **Human Resources education field has the highest attrition (25.93%)** |
-| 16 | **Technical Degree holders (24.24%)** and **Marketing (22.01%)** are also high-risk education segments |
-| 17 | **Life Sciences (14.69%)** and **Medical (13.58%)** are the most stable education backgrounds |
+| 15 | **Frequent travelers have 24.91% attrition** — business travel fatigue is a clear retention risk |
+| 16 | **Single employees have the highest attrition (25.53%)** vs Married (12.48%) and Divorced (10.09%) |
+| 17 | **Technical Degree (24.24%)** and **Human Resources field (25.93%)** have the highest education-based attrition |
 
 ---
 
@@ -206,7 +188,7 @@ Dashboard / Output
 | Section | Details |
 |---------|---------|
 | Attrition by Job Role | Table — 9 roles with Total Headcount, Employees Left & color-coded Attrition Rate % |
-| Attrition by Salary Band | Table — 4 bands with conditional formatting (Red = High Risk, Green = Low Risk) |
+| Attrition by Salary Band | Table — Under 3K (28.61%) · 3K–6K (12.72%) · 6K–10K (12.00%) · Above 10K (8.90%) with conditional formatting |
 
 ---
 
@@ -215,12 +197,11 @@ Dashboard / Output
 
 | Section | Details |
 |---------|---------|
-| Attrition by Age Group | Table — 4 age buckets with color-coded attrition rates |
-| Attrition by Marital Status | Donut chart — Single (14.80%) · Female vs Male breakdown |
-| Attrition by Education Field | Table — 6 fields with conditional formatting |
-| Attrition by Marital Status | Bar chart — Single (25.53%) · Married (12.48%) · Divorced (10.09%) |
+| Attrition by Age Group | Table — 18–25 (35.77%) · 26–35 (19.14%) · 36–45 (9.19%) · 46–60 (12.45%) |
+| Attrition by Marital Status | Donut + Bar chart — Single (25.53%) · Married (12.48%) · Divorced (10.09%) |
 | Attrition by Business Travel | Donut — Travel_Frequently (24.91%) · Travel_Rarely (14.96%) · Non-Travel (8.00%) |
 | Attrition by Overtime | Bar chart — Yes (30.53%) · No (10.44%) |
+| Attrition by Education Field | Table — HR (25.93%) · Technical (24.24%) · Marketing (22.01%) · Life Sciences (14.69%) |
 
 ---
 
@@ -235,7 +216,7 @@ How to Run This Project
 | 2 | Load `HR-Employee-Attrition.csv` as data source |
 | 3 | Recreate `Age_Group` and `Salary_band` buckets in Power Query |
 | 4 | Build DAX measures for Attrition Rate, Employees Left, Avg Tenure |
-| 5 | Navigate between Overview → Deep Dive 1 → Deep Dive 2 using the top buttons |
+| 5 | Navigate between Overview → Deep Dive 1 → Deep Dive 2 using top buttons |
 
 > 📥 **Power BI file — Download here:** [Google Drive Link](#) *(update with your link)*
 
@@ -244,7 +225,13 @@ How to Run This Project
 Results & Conclusion
 ====================
 
-The analysis clearly identifies the **highest-risk employee segments** for attrition at IBM: Sales Representatives (39.76%), young employees aged 18–25 (35.77%), overtime workers (30.53%), frequent business travelers (24.91%), and employees earning under $3K/month (28.61%). Salary is the single most controllable lever — attrition drops from 28.61% to 8.90% as income rises. Single employees and those in HR/Technical Degree education fields are also disproportionately likely to leave. These insights give HR leadership a clear prioritization framework: **fix compensation for low earners, reduce overtime burden, and build targeted retention programs for Sales and young employees.**
+The analysis directly answers all 3 business questions:
+
+1. **Overall attrition rate is 16.12%** — 237 out of 1,470 employees left with an average tenure of 5.1 years.
+2. **Sales is losing the most people (20.63%)** — followed by HR (19.05%), with Sales Representatives at a critical 39.76% attrition rate.
+3. **Yes — both pay and age strongly predict attrition.** Low earners (Under 3K: 28.61%) and young employees (18–25: 35.77%) are the highest-risk segments. Overtime workers (30.53%) and frequent travelers (24.91%) compound the risk further.
+
+**Recommendation:** Prioritize salary increases for Under 3K earners, reduce overtime burden in Sales, and build targeted retention programs for employees aged 18–35.
 
 ---
 
